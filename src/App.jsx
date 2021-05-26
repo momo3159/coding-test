@@ -34,6 +34,7 @@ const App = () => {
   return (
     <div className="App">
       <Header title="Title" />
+      {fetchError && <div>データの取得に失敗しました リロードしてください</div>}
     </div>
   );
 };
