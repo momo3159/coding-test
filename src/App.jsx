@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 
 const App = () => {
   const baseURL = 'https://opendata.resas-portal.go.jp';
+  const [fetchError, setFetchError] = useState(false);
+  const [prefectures, setPrefectures] = useState([]);
 
   useEffect(() => {
     const fetchPrefectures = async () => {
@@ -13,6 +15,20 @@ const App = () => {
 
       return response;
     };
+
+    (async () => {
+      const response = await fetchPrefectures();
+      if (response.status !== 200) setFetchError(true);
+      else {
+        setFetchError(false);
+        const prefs = response.data.result.map((obj) => ({
+          ...obj,
+          isChecked: false,
+        }));
+        prefs[12].isChecked = true;
+        setPrefectures(prefs);
+      }
+    })();
   }, []);
 
   return (
