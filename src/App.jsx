@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import CheckboxWithLabel from './components/CheckBoxWithLabel';
 import Header from './components/Header';
 
 const App = () => {
@@ -35,6 +36,21 @@ const App = () => {
     <div className="App">
       <Header title="Title" />
       {fetchError && <div>データの取得に失敗しました リロードしてください</div>}
+      <div>
+        {prefectures.map((pref, idx) => (
+          <CheckboxWithLabel
+            key={prefectures.prefCode}
+            id={prefectures.prefCode}
+            value={pref.prefName}
+            isChecked={pref.isChecked}
+            onChange={() => {
+              prefectures[idx].isChecked = !prefectures[idx].isChecked;
+              setPrefectures([...prefectures]);
+            }}
+            label={pref.prefName}
+          />
+        ))}
+      </div>
     </div>
   );
 };
