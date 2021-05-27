@@ -6,7 +6,7 @@ const CheckboxWithLabel = ({ id, isChecked, name, value, onChange, label }) => (
       id={id}
       value={value}
       name={name}
-      isChecked={isChecked}
+      ischecked={isChecked}
       onChange={onChange}
     />{' '}
     <label htmlFor={id}>{label}</label>
