@@ -1,4 +1,4 @@
-import Checkbox from './Checkbox';
+import Checkbox from './CheckBox';
 
 const CheckboxWithLabel = ({ id, isChecked, name, value, onChange, label }) => (
   <div>
