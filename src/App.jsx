@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Header from './components/Header';
+import CheckboxWithLabel from './components/CheckBoxWithLabel';
+import PrefecturePopulationChart from './components/PrefecturePopulationChart';
+import styles from './App.module.css';
 
-function App() {
+const App = () => {
+  const baseURL = 'https://opendata.resas-portal.go.jp';
+  const [fetchError, setFetchError] = useState(false);
+  const [prefectures, setPrefectures] = useState([]);
+
+  useEffect(() => {
+    const fetchPrefectures = async () => {
+      const response = await axios.get(`${baseURL}/api/v1/prefectures`, {
+        headers: { 'X-API-KEY': process.env.REACT_APP_API_KEY },
+      });
+
+      return response;
+    };
+
+    (async () => {
+      const response = await fetchPrefectures();
+      if (response.status !== 200) setFetchError(true);
+      else {
+        setFetchError(false);
+        const prefs = response.data.result.map((obj) => ({
+          ...obj,
+          isChecked: false,
+        }));
+        prefs[12].isChecked = true;
+        setPrefectures(prefs);
+      }
+    })();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header title="Title" />
+      <p className={styles.heading}>都道府県</p>
+      {fetchError && <div>データの取得に失敗しました リロードしてください</div>}
+      <div className={styles['checkbox-container']}>
+        {prefectures.map((pref, idx) => (
+          <CheckboxWithLabel
+            key={prefectures.prefCode}
+            id={prefectures.prefCode}
+            value={pref.prefName}
+            isChecked={pref.isChecked}
+            onChange={() => {
+              prefectures[idx].isChecked = !prefectures[idx].isChecked;
+              setPrefectures([...prefectures]);
+            }}
+            label={pref.prefName}
+          />
+        ))}
+      </div>
+      <PrefecturePopulationChart
+        checkedPrefectures={prefectures.filter((pref) => pref.isChecked)}
+      />
     </div>
   );
-}
+};
 
 export default App;
