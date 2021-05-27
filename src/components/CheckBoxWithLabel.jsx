@@ -1,12 +1,12 @@
 import Checkbox from './CheckBox';
 
-const CheckboxWithLabel = ({ id, isChecked, name, value, onChange, label }) => (
+const CheckboxWithLabel = ({ id, ischecked, name, value, onChange, label }) => (
   <div>
     <Checkbox
       id={id}
       value={value}
       name={name}
-      ischecked={isChecked}
+      ischecked={ischecked}
       onChange={onChange}
     />{' '}
     <label htmlFor={id}>{label}</label>
