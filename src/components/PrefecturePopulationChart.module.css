@@ -1,0 +1,35 @@
+.legend-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-left: 0px;
+  column-gap: 6px;
+}
+
+.list-item:before {
+  border-top: 1px solid;
+  content: "";
+  width: 2em;
+  margin-right: 0.5em;
+}
+
+@media (max-width: 600px) {
+  .legend-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-left: 0px;
+  }    
+
+  .list-item:before {
+    border-top: 1px solid;
+    content: "";
+    width: 1em;
+    margin-right: 0.5em;
+  }
+}
+
+
+.list-item {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
