@@ -36,6 +36,7 @@ const App = () => {
   return (
     <div className="App">
       <Header title="Title" />
+      <p>都道府県</p>
       {fetchError && <div>データの取得に失敗しました リロードしてください</div>}
       <div>
         {prefectures.map((pref, idx) => (
