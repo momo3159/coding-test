@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import CheckboxWithLabel from './components/CheckBoxWithLabel';
 import Header from './components/Header';
+import CheckboxWithLabel from './components/CheckBoxWithLabel';
+import PrefecturePopulationChart from './components/PrefecturePopulationChart';
 
 const App = () => {
   const baseURL = 'https://opendata.resas-portal.go.jp';
@@ -51,6 +52,9 @@ const App = () => {
           />
         ))}
       </div>
+      <PrefecturePopulationChart
+        checkedPrefectures={prefectures.filter((pref) => pref.isChecked)}
+      />
     </div>
   );
 };
