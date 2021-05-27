@@ -28,7 +28,9 @@ const App = () => {
           ...obj,
           isChecked: false,
         }));
+        // 見本のために東京と大阪をはじめに表示しておく
         prefs[12].isChecked = true;
+        prefs[26].isChecked = true;
         setPrefectures(prefs);
       }
     })();
@@ -45,7 +47,7 @@ const App = () => {
             key={prefectures.prefCode}
             id={prefectures.prefCode}
             value={pref.prefName}
-            isChecked={pref.isChecked}
+            ischecked={pref.isChecked}
             onChange={() => {
               prefectures[idx].isChecked = !prefectures[idx].isChecked;
               setPrefectures([...prefectures]);
