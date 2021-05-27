@@ -45,7 +45,7 @@ const App = () => {
             key={prefectures.prefCode}
             id={prefectures.prefCode}
             value={pref.prefName}
-            isChecked={pref.isChecked}
+            ischecked={pref.isChecked}
             onChange={() => {
               prefectures[idx].isChecked = !prefectures[idx].isChecked;
               setPrefectures([...prefectures]);
