@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import CheckboxWithLabel from './components/CheckBoxWithLabel';
 import PrefecturePopulationChart from './components/PrefecturePopulationChart';
+import styles from './App.module.css';
 
 const App = () => {
   const baseURL = 'https://opendata.resas-portal.go.jp';
@@ -36,9 +37,9 @@ const App = () => {
   return (
     <div className="App">
       <Header title="Title" />
-      <p>都道府県</p>
+      <p className={styles.heading}>都道府県</p>
       {fetchError && <div>データの取得に失敗しました リロードしてください</div>}
-      <div>
+      <div className={styles['checkbox-container']}>
         {prefectures.map((pref, idx) => (
           <CheckboxWithLabel
             key={prefectures.prefCode}
